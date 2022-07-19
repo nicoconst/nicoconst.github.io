@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>APIS de Peliculas</title>
+</head>
+
+<body>
+    <header>
+        <h1>Constantine Entertainment Movies</h1>
+    </header>
+    <div class="content" id="content"></div>
+    <div class="botones">
+        <button id="anterior">Anterior</button>
+        <button id="siguiente">Siguiente</button>
+    </div>
+    <footer>
+        <div class="text-foot">
+            <p>Sitio Web Creado Por: Constantine Entertainment</p>
+        </div>
+    </footer>
+    <script>
+        let pagina = 1;
+        const btnAnterior = document.getElementById("anterior");
+        const btnSiguiente = document.getElementById("siguiente");
+
+        btnSiguiente.addEventListener('click', () => {
+            if (pagina < 1000) {
+                pagina += 1;
+                cargarPeliculas();
+            }
+        });
+
+        btnAnterior.addEventListener('click', () => {
+            if (pagina > 1) {
+                pagina -= 1;
+                cargarPeliculas();
+            }
+        });
+
+        const cargarPeliculas = async () => {
+            try {
+                const respuesta = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=192e0b9821564f26f52949758ea3c473&language=es-MX&page=${pagina}`);
+
+                console.log(respuesta);
+
+                if (respuesta.status === 200) {
+                    const datos = await respuesta.json();
+
+                    let peliculas = '';
+                    datos.results.forEach(pelicula => {
+                        peliculas += `
+					<div class="pelicula">
+						<img class="poster" src="https://image.tmdb.org/t/p/w500/${pelicula.poster_path}">
+						<h3 class="titulo">${pelicula.title}</h3>
+					</div>
+				`;
+                    });
+
+                    document.getElementById('content').innerHTML = peliculas;
+
+                } else if (respuesta.status === 404) {
+                    console.log('La pelicula que buscas no existe');
+                } else {
+                    console.log('Hubo un error y no sabemos que paso');
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
+
+        cargarPeliculas();
+
+    </script>
+</body>
+
+</html>

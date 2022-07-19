@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location</title>
+</head>
+<body onload="getLastUser()" >
+    <h1>Bienvenido(a) <span id="user"></span></h1>
+    <form onsubmit="login()">
+        <input id="username" placeholder="Ingrese su nombre de usuario" type="text" value="" size="30">
+        <input type="submit">
+        <button onclick="logOut()">Salir</button>
+    </form>
+    <script>
+        function getLastUser(){
+            var user = localStorage.getItem("username");
+            document.getElementById("user").innerText = user;
+        };
+
+        function login(){
+            var username = document.getElementById("username").value;
+            localStorage.setItem("username", username);
+        };
+
+        function logOut(){
+            var username = document.getElementById("username".value);
+            localStorage.removeItem("username", username);
+        };
+    </script>
+    <br> <br> <br>
+    <button id="demo" onclick="getLocation()">Toca aquí para Ganar un Premio</button>
+    <script>
+        const myElement = document.getElementById("demo");
+
+        function getLocation(){
+            if (navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                myElement.innerHTML = "Geolocation is not supported by this browser.";
+            };
+        };
+
+        function showPosition(position){
+            myElement.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+        };
+    </script>
+
+    <br> <br> <br>
+
+    <img id="imagen" src="">
+    <br> <br> <br>
+    <button onclick="getImage()">Click for a Surprise</button>
+    <script>
+        var url = "https://picsum.photos/840/560";
+        function getImage(){
+            var imagen = document.getElementById("imagen");
+            fetch(url).then(response =>{
+                console.log(response);
+                imagen.src = response.url;
+            }) .catch(error =>{
+                console.log(error);
+                alert("Ha ocurrido un error!");
+            });
+        };
+    </script>
+</body>
+</html>

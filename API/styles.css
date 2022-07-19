@@ -1,0 +1,117 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	background: rgb(250, 250, 235);
+	color: #1d1d1d;
+}
+
+header{
+    background: #1d0e43;
+    text-align: center;
+    margin: 30px 50px;
+    padding: 10px;
+    font-size: 25px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-style:normal;
+    border-radius: 7px;
+    color: rgb(255, 255, 255);
+    position: relative;
+}
+
+.content {
+	width: 90%;
+	max-width: 1000px;
+	margin: 40px auto 100px auto;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 40px;
+}
+
+.content .pelicula {
+	text-align: center;
+}
+
+.content .pelicula .titulo {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.content .pelicula .poster {
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+
+.botones {
+	position: fixed;
+	bottom: 0;
+	background: #100a1f;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 30px;
+}
+
+.text-foot {
+	position: fixed;
+	bottom: 0;
+	background: #100a1f;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding: 30px;
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 18px;
+}
+
+#anterior{
+    position: absolute;
+    bottom: 400px;
+    right: 1600px;
+    text-align: center;
+    border: none;
+	height: 50px;
+	width: 200px;
+	background: #241744;
+	color: white;
+	border-radius: 50px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+    font-size: 18px;
+    transition: .3s ease all;
+}
+
+#siguiente{
+    position: absolute;
+    bottom: 400px;
+    right: 100px;
+    text-align: center;
+    border: none;
+	height: 50px;
+	width: 200px;
+	background: #241744;
+	color: white;
+	border-radius: 50px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+    font-size: 18px;
+    transition: .3s ease all;
+}
+
+#anterior:hover{
+    cursor: pointer;
+	background: #137c32;
+}
+
+#siguiente:hover{
+    cursor: pointer;
+	background: #137c32;
+}

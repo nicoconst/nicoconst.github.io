@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación 12 Julio 2022.</title>
+    <script src="node_modules/lena.js/dist/browser.js"></script>
+</head>
+<body>
+    <img src="lena.png" id="imagen-original">
+    <canvas id="imagen-filtrada"></canvas>
+    <script type="text/javascript">
+        var imagenOriginal = document.getElementById("imagen-original");
+        var imagenFiltradaCanvas = document.getElementById("imagen-filtrada");
+        var filter = LenaJS["gaussian"];
+        LenaJS.filterImage(imagenFiltradaCanvas, filter, imagenOriginal);
+        var filter2 = LenaJS["mirror"];
+        LenaJS.redrawCanvas(imagenFiltradaCanvas, filter2);
+        var filter3 = LenaJS["grayscale"];
+        LenaJS.redrawCanvas(imagenFiltradaCanvas, filter3);
+    </script>
+</body>
+</html>
