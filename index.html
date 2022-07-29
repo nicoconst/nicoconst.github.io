@@ -3,123 +3,86 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego Canva</title>
+    <title>Juego de preguntas</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body onload="iniciar();">
+<body>
+    <audio id="correcto" src="bienhecho.mp3"></audio>
+    <audio id="incorrecto" src="malhecho.mp3"></audio>
     <header>
-        <h1>Game of Luffy</h1>
+        <h1>Preguntas Preguntonas</h1>
     </header>
-    <canvas id="espacio_juego" width="1020" height="640" style=" background-image: url('fondo.png');"></canvas>
-    <img src="fondo.png" id="fondo" style="display: none;">
-    <img src="suelo.png" id="suelo" style="display: none;">
-    <img src="nube.png" id="nube" style="display: none;">
-    <img src="luffyp.png" id="luffy" style="display: none;">
-    <img src="luffyp copia.png" id="luffyDos" style="display: none;">
-    <script type="text/javascript">
-        function iniciar() {
-            var canvas = document.getElementById("espacio_juego");
-            var context = canvas.getContext("2d");
-            nube();
-            animarNube();
-        };
+    <div class="contenedor">
+        <div class="puntaje" id="puntaje"></div>
+        <div class="encabezado">
+            <div class="categoria" id="categoria"></div>
+            <div class="numero" id="numero"></div>
+            <div class="pregunta" id="pregunta"></div>
+            <img src="#" class="imagen" id="imagen">
+        </div>
+        <div class="btn" id="btn1" onclick="oprimir_btn(0)"></div>
+        <div class="btn" id="btn2" onclick="oprimir_btn(1)"></div>
+        <div class="btn" id="btn3" onclick="oprimir_btn(2)"></div>
+        <div class="btn" id="btn4" onclick="oprimir_btn(3)"></div>
 
-        var posicionX = 0;
-        var intervalo;
-        var posicionXnube = 1276;
-        var posicionXnubeDos = 1000;
-        var posicionXnubeTres = 1600;
-        var tecla = "D";
-        var img2 = document.getElementById("luffy");
-        var luffyDos = document.getElementById("luffyDos");
-        var posicionXobj = Math.floor((Math.random() * (325 - 0 + 1)) + 0);
-        var posicionXobjDos = Math.floor((Math.random() * (665 - 340 + 1)) + 340);
-        var posicionXobjTres = Math.floor((Math.random() * (1005 - 680 + 1)) + 680);
-        var posicionYobj = 0;
-
-        window.onkeydown = function obtenerTecla(valor) {
-            tecla = valor.key
-            if (posicionX >= 0 && posicionX < 870 && (tecla == 'd' || tecla == 'D' || tecla == 'ArrowRight')) {
-                posicionX += 60;
-
-            }
-            else if (posicionX > 0 && (tecla == 'a' || tecla == 'A' || tecla == 'ArrowLeft')) {
-                posicionX -= 60;
-
-            }
-        };
-
-        function nube() {
-
-            var canvas3 = document.getElementById("espacio_juego");
-            var context3 = canvas3.getContext("2d");
-
-
-            var img3 = document.getElementById("nube");
-            
-            if (((posicionXobj >= posicionX && posicionXobj + 15 <= posicionX + 150) && (posicionYobj >= 350 && posicionYobj + 15 <= 550)) || ((posicionXobjDos >= posicionX && posicionXobjDos + 15 <= posicionX + 150) && (posicionYobj >= 350 && posicionYobj + 15 <= 550)) || ((posicionXobjTres >= posicionX && posicionXobjTres + 15 <= posicionX + 150) && (posicionYobj >= 350 && posicionYobj + 15 <= 550))) {
-                context3.clearRect(0, 0, 1020, 640);
-                alert("Has perdido");
-            } else {
-                
-            context3.clearRect(0, 0, 1020, 640);
-
-            if (posicionX >= 0 && posicionX < 870 && (tecla == 'd' || tecla == 'D' || tecla == 'ArrowRight')) {
-
-                context3.drawImage(img2, posicionX, 350, 150, 200);
-            }
-            else if (posicionX > 0 && (tecla == 'a' || tecla == 'A' || tecla == 'ArrowLeft')) {
-
-                context3.drawImage(luffyDos, posicionX, 350, 150, 200);
-            }
-
-
-            posicionXnube -= 60;
-            context3.drawImage(img3, posicionXnube, -70, 256, 256);
-
-            posicionXnubeDos -= 60;
-            context3.drawImage(img3, posicionXnubeDos, 60, 256, 256);
-
-            posicionXnubeTres -= 60;
-            context3.drawImage(img3, posicionXnubeTres, 90, 256, 256);
-
-
-            if (posicionXnube <= -256) {
-                posicionXnube = 1276;
-            }
-
-            if (posicionXnubeDos <= -256) {
-                posicionXnubeDos = 1276;
-            }
-
-            if (posicionXnubeTres <= -256) {
-                posicionXnubeTres = 1276;
-            }
-
-
-            context3.fillStyle = "red";
-            context3.fillRect(posicionXobj, posicionYobj, 25, 25);
-            context3.fillRect(posicionXobjDos, posicionYobj, 25, 25);
-            context3.fillRect(posicionXobjTres, posicionYobj, 25, 25);
-            posicionYobj += 40;
-
-            if (posicionYobj >= 600) {
-                posicionYobj = -30;
-                posicionXobj = Math.floor((Math.random() * (315 - 0 + 1)) + 0);
-                posicionXobjDos = Math.floor((Math.random() * (655 - 340 + 1)) + 340);
-                posicionXobjTres = Math.floor((Math.random() * (995 - 680 + 1)) + 680);
-            }
-        }
-        };
-
-        function animarNube() {
-            setInterval("nube()", 125);
-        };
-
-    </script>
+    </div>
+    <script src="index.js"></script>
 </body>
 
 </html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Juego de Trivia</title>
+</head>
+
+<body onload="getImage()"> 
+    <script>
+        var url = "https://picsum.photos/900/400";
+        function getImage() {
+            var imagen = document.getElementById("img");
+            fetch(url).then(response => {
+                console.log(response);
+                imagen.src = response.url;
+            }).catch(error => {
+                console.log(error);
+                alert("Ha ocurrido un error al cargar el fondo de la página!");
+            });
+        };
+    </script>
+    <audio id="correcto" style="display:none ;">
+        <source src="bienhecho.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="incorrecto" style="display:none ;">
+        <source src="malhecho.mp3" type="audio/mpeg">
+    </audio>
+    <header>
+        <h1>Preguntas Preguntonas</h1>
+    </header>
+    <section>
+        <div class="contenedor">
+            <div class="pregunta">Aquí va la pregunta</div>
+            <div class="imagen"><img src="" id="img"></div>
+            <div class="respuestas">
+                <button id="opc1">Opción 1</button>
+                <button id="opc2">Opción 2</button>
+                <button id="opc3">Opción 3</button>
+                <button id="opc4">Opción 4</button>
+             </div>
+        </div>
+    </section>
+    <script>
+        var correcto = document.getElementById("correcto");
+        function playCorrect(){
+            
+        };
+    </script>
+</body>
+
+</html> -->
